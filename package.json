@@ -1,0 +1,20 @@
+{
+  "name": "vue3-admin-server",
+  "version": "1.0.0",
+  "description": "\"# vue3-admin-server\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wangtongmeng/vue3-admin-server.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wangtongmeng/vue3-admin-server/issues"
+  },
+  "homepage": "https://github.com/wangtongmeng/vue3-admin-server#readme"
+}
