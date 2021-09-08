@@ -8,6 +8,7 @@ import {
   // sequelize+typescript 参考文档
   // https://sequelize.org/master/manual/typescript.html
   
+  // model类型
   export interface UserModelProps {
     id: number;
     username: string;
@@ -19,22 +20,25 @@ import {
     status: 0 | 1;
   }
   
+  // 注册接口params类型 id 和 isSuper创建时候可以不用定义自动分配
   export type RegisterModel = Omit<UserModelProps, 'id'|'isSuper'>
   
   // 在“User.build”和“User.create”调用中，有些属性是可选的
-  interface UserCreationAttributes extends Optional<UserModelProps, "id" | "isSuper" | "status"> {}
+  interface UserCreationAttributes extends Optional<UserModelProps, "id" | "isSuper" | "status" | "avatar"> {}
   
+  // Model实例接口
   interface UserInstance
     extends Model<UserModelProps, UserCreationAttributes>,
       UserModelProps {}
   
   // 创建User模型  数据表的名字是users
   const User = seq.define<UserInstance>('User', {
-    id: { // id会自动创建 并设为主键、自增
+    id: {
       primaryKey: true,
       type: DataTypes.INTEGER.UNSIGNED,
       autoIncrement: true
     },
+    // id会自动创建 并设为主键、自增
     username: {
       type: DataTypes.STRING,
       allowNull: false,
