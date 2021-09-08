@@ -3,15 +3,21 @@ import { createUser, getUserInfo } from '../services/auth'
 import { ErrorResponse, SuccessResponse } from '../utils/Response'
 import errorInfo from '../constants/errorInfo'
 import { createMd5 } from '../utils/createMD5'
+import { createToken } from '../utils/token'
 
 const {
  registerUserNameExistInfo,
- registerFailInfo
+ registerFailInfo,
+ loginFailInfo
 } = errorInfo
 
+/**
+ * 用户注册controller
+ * @param params RegisterModel
+ */
 export const registerController = async (params: RegisterModel) => {
   const { username, password } = params
-  // 注册前先看下用户是否已注册 getUserInfo services
+  // 先看下用户是否已注册
   const userInfo = await getUserInfo({ username })
   if (userInfo) { // 如果已注册
     // 用户已注册
@@ -30,4 +36,27 @@ export const registerController = async (params: RegisterModel) => {
     const { code, message } = registerFailInfo
     return new ErrorResponse(code, message)
   }
+}
+
+// 登录controller
+
+interface LoginModel {
+  username: string;
+  password: string;
+}
+export const loginController = async (params: LoginModel) => {
+  const { username, password } = params
+  // 根据用户名和密码 获取用户信息
+  const userInfo = await getUserInfo({ username, password })
+  if (userInfo) { // 能获取到返回token
+    const { id, username } = userInfo
+    const token = createToken({ // 根据用户id和用户名生成token
+      id,
+      username
+    })
+    return new SuccessResponse({ token })
+  }
+  // 获取不到返回 登录失败
+  const { code, message } = loginFailInfo
+  return new ErrorResponse(code, message)
 }
