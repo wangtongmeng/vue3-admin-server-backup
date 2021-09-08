@@ -22,4 +22,9 @@ router.post('/login', async ctx => {
   ctx.body = await loginController({ username, password })
 })
 
+
+router.get('/test', async ctx => {
+  ctx.body = '测试接口'
+})
+
 export default router
