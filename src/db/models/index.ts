@@ -8,8 +8,8 @@ import UserRoleModel from './userRole'
 ;(() => {
   /**
    * onDelete onUpdate
-   * https://www.sequelize.com.cn/core-concepts/assocs#ondelete-%E5%92%8C-onupdate
-   * https://blog.csdn.net/yajing8/article/details/73014004
+   * 官方配置文档 https://www.sequelize.com.cn/core-concepts/assocs#ondelete-%E5%92%8C-onupdate
+   * 配置说明 https://blog.csdn.net/yajing8/article/details/73014004
   */
   // RoleMenuModel.role_id = UserModel.id
   RoleAccessModel.belongsTo(RolesModel, {
