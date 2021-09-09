@@ -1,8 +1,16 @@
 import Router from '@koa/router'
-import { loginController, registerController } from '../controller/auth'
+import { loginController, registerController, userInfoController } from '../controller/auth'
 
 const router = new Router({
   prefix: '/api/auth'
+})
+
+/**
+* 测试接口
+**/
+
+router.get('/test', async ctx => {
+  ctx.body = '只是个测试接口'
 })
 
 /**
@@ -22,9 +30,14 @@ router.post('/login', async ctx => {
   ctx.body = await loginController({ username, password })
 })
 
+/**
+* /auth/info
+* 根据token获取用户信息
+*/
 
-router.get('/test', async ctx => {
-  ctx.body = '测试接口'
+router.post('/info', async ctx => {
+  const token = ctx.header.authorization || ctx.request.body.token
+  ctx.body = await userInfoController(token)
 })
 
 export default router
