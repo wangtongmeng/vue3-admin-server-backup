@@ -37,7 +37,7 @@ export const registerController = async (params: RegisterPropsWithRoles) => {
     await allocUserRoleService(result.id, roleIds)
     return new SuccessResponse(result)
   } catch (err) { // 注册失败
-    console.log(err.message, err.stack)
+    // console.log(err.message, err.stack)
     const { code, message } = registerFailInfo
     return new ErrorResponse(code, message)
   }
